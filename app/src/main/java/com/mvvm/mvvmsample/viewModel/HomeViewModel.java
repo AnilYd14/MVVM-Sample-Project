@@ -9,7 +9,7 @@ import com.mvvm.mvvmsample.model.People;
 import com.mvvm.mvvmsample.repository.PeopleRepository;
 import com.mvvm.mvvmsample.views.HomeActivity;
 
-public class HomeViewModel extends ViewModel {
+public class HomeViewModel extends BaseViewModel {
 
     public void setNavigator(HomeActivity homeActivity) {
 

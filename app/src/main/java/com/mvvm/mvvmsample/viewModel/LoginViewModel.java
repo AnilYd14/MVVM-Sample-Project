@@ -1,5 +1,6 @@
 package com.mvvm.mvvmsample.viewModel;
 
+import android.arch.lifecycle.ViewModel;
 import android.text.TextUtils;
 
 import com.mvvm.mvvmsample.interfaces.LoginNavigator;
@@ -7,7 +8,7 @@ import com.mvvm.mvvmsample.interfaces.LoginNavigator;
 import java.lang.ref.WeakReference;
 
 
-public class LoginViewModel extends BaseViewModel {
+public class LoginViewModel extends ViewModel {
 
 
     private WeakReference<LoginNavigator> mNavigator;

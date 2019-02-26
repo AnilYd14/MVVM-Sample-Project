@@ -18,12 +18,7 @@ package com.mvvm.mvvmsample.viewModel;
 
 import android.arch.lifecycle.ViewModel;
 
-
-/**
- * Created by amitshekhar on 07/07/17.
- */
-
-public abstract class BaseViewModel<N> extends ViewModel {
+public abstract class BaseViewModel extends ViewModel {
 
 
 

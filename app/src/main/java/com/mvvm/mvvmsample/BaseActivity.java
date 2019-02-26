@@ -1,14 +1,15 @@
 package com.mvvm.mvvmsample;
 
+import android.arch.lifecycle.ViewModel;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 
-import com.mvvm.mvvmsample.viewModel.BaseViewModel;
+import dagger.android.AndroidInjection;
 
-public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseViewModel> extends AppCompatActivity {
+public abstract class BaseActivity<T extends ViewDataBinding, V extends ViewModel> extends AppCompatActivity {
 
     private T mViewDataBinding;
     private V mViewModel;
@@ -16,6 +17,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        performDependencyInjection();
         performDataBinding();
     }
 
@@ -46,6 +48,14 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
         this.mViewModel = mViewModel == null ? getViewModel() : mViewModel;
         mViewDataBinding.setVariable(getBindingVariable(), mViewModel);
         mViewDataBinding.executePendingBindings();
+    }
+
+    public T getViewDataBinding() {
+        return mViewDataBinding;
+    }
+
+    public void performDependencyInjection() {
+//        AndroidInjection.inject(this);
     }
 
 

@@ -1,16 +1,19 @@
 package com.mvvm.mvvmsample.views;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
+
+import com.mvvm.mvvmsample.BR;
+import com.mvvm.mvvmsample.BaseActivity;
 import com.mvvm.mvvmsample.R;
 import com.mvvm.mvvmsample.databinding.ActivityMainBinding;
 import com.mvvm.mvvmsample.interfaces.LoginNavigator;
 import com.mvvm.mvvmsample.viewModel.LoginViewModel;
 
-public class LoginActivity extends AppCompatActivity implements LoginNavigator {
+import javax.inject.Inject;
+
+public class LoginActivity extends BaseActivity<ActivityMainBinding, LoginViewModel> implements LoginNavigator {
 
 
     private ActivityMainBinding activityMainBinding;
@@ -19,13 +22,25 @@ public class LoginActivity extends AppCompatActivity implements LoginNavigator {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        activityMainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        mLoginViewModel = new LoginViewModel();
         mLoginViewModel.setNavigator(this);
-        activityMainBinding.setViewModel(mLoginViewModel);
-        activityMainBinding.executePendingBindings();
+        activityMainBinding = getViewDataBinding();
 
+    }
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public LoginViewModel getViewModel() {
+        mLoginViewModel = new LoginViewModel();
+        return mLoginViewModel;
+    }
+
+    @Override
+    public int getBindingVariable() {
+        return BR.viewModel;
     }
 
     @Override
